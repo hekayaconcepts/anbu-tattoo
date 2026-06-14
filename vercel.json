@@ -1,6 +1,4 @@
 {
   "version": 2,
-  "buildCommand": "rm -rf .next out && npm run build",
-  "outputDirectory": "out",
   "framework": null
 }
