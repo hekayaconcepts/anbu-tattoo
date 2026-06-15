@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter, Bebas_Neue } from "next/font/google";
-import "./globals.css";
+// CSS inlined
 
 const playfair = Playfair_Display({
   subsets: ["latin"],

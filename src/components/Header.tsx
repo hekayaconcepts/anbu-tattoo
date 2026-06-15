@@ -25,31 +25,17 @@ export default function Header() {
 
   return (
     <>
-      {/* Prevent horizontal overflow globally */}
-      <style>{`
-        html, body { overflow-x: hidden; max-width: 100%; }
-        * { box-sizing: border-box; }
-        @media (min-width: 768px) {
-          .desktop-nav { display: flex !important; }
-          .mobile-only { display: none !important; }
-        }
-        @media (max-width: 767px) {
-          .desktop-nav { display: none !important; }
-          .mobile-only { display: flex !important; }
-        }
-      `}</style>
-
-      <header style={{
+      <div style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 9999,
         height: '52px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '0 16px',
         transition: 'all 0.3s ease',
         backgroundColor: scrolled ? 'rgba(10,10,10,0.95)' : 'rgba(10,10,10,0.6)',
-        backdropFilter: 'blur(8px)',
+        backdropFilter: scrolled ? 'blur(10px)' : 'blur(4px)',
         borderBottom: scrolled ? '1px solid rgba(200,169,126,0.1)' : '1px solid rgba(255,255,255,0.05)',
       }}>
-        {/* Logo — LEFT (standard pattern) */}
+        {/* Logo — LEFT */}
         <Link href="/" style={{
           textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px',
           flexShrink: 0,
@@ -61,8 +47,8 @@ export default function Header() {
           }}>ANBU</span>
         </Link>
 
-        {/* Desktop Nav — RIGHT */}
-        <nav className="desktop-nav" style={{ alignItems: 'center', gap: '24px', display: 'none' }}>
+        {/* Desktop Nav — RIGHT (hidden on mobile via media query) */}
+        <nav id="desktop-nav" style={{ alignItems: 'center', gap: '24px', display: 'flex' }}>
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href} style={{
               color: '#FFFFFF', textDecoration: 'none', fontSize: '12px',
@@ -76,10 +62,10 @@ export default function Header() {
           }}>Book Now</Link>
         </nav>
 
-        {/* Hamburger — RIGHT (standard pattern, mobile only) */}
-        <button className="mobile-only" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu" style={{
+        {/* Hamburger — RIGHT (mobile only) */}
+        <button id="hamburger-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu" style={{
           background: 'none', border: 'none', cursor: 'pointer',
-          display: 'none', flexDirection: 'column', gap: '5px', padding: '8px',
+          display: 'flex', flexDirection: 'column', gap: '5px', padding: '8px',
           width: '40px', height: '40px', alignItems: 'center', justifyContent: 'center',
         }}>
           <span style={{
@@ -97,7 +83,19 @@ export default function Header() {
             transform: menuOpen ? 'rotate(-45deg) translate(4px, -4px)' : 'rotate(0deg)',
           }} />
         </button>
-      </header>
+      </div>
+
+      {/* Responsive styles */}
+      <style>{`
+        @media (max-width: 767px) {
+          #desktop-nav { display: none !important; }
+          #hamburger-btn { display: flex !important; }
+        }
+        @media (min-width: 768px) {
+          #desktop-nav { display: flex !important; }
+          #hamburger-btn { display: none !important; }
+        }
+      `}</style>
 
       {/* Mobile Menu Overlay */}
       {menuOpen && (
@@ -118,10 +116,10 @@ export default function Header() {
             fontWeight: 600, fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '3px', marginTop: '16px',
           }}>Book Now</Link>
         </div>
-      )>
+      )}
 
-      {/* Spacer to push content below fixed header */}
-      <div style={{ height: '52px', flexShrink: 0 }} />
+      {/* Spacer */}
+      <div style={{ height: '52px' }} />
     </>
   )
 }

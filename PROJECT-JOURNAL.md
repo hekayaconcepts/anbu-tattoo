@@ -8,6 +8,59 @@
 
 ---
 
+## Deployment Info
+- **Live URL:** https://anbu-tattoo.vercel.app
+- **GitHub:** https://github.com/hekayaconcepts/anbu-tattoo
+- **Vercel Project ID:** prj_eUQ74cmbVQx9GzxHyElOpHEFCS88
+- **Vercel Token:** (set via Vercel CLI, stored in Vercel dashboard)
+- **Deploy command:** `npx vercel --token=$VERCEL_TOKEN --prod --yes`
+
+---
+
+## Agent Build Phase
+
+| # | Agent | Status | Location |
+|---|---|---|---|
+| 1 | **Scraper Agent** | ✅ Complete | `AGENTS/scraper-agent.md` |
+| 2 | **Developer Agent** | ✅ Complete | `AGENTS/developer-agent.md` |
+| 3 | **Outreach Agent** | ✅ Complete | `AGENTS/outreach-agent.md` |
+| 4 | **PDF Generator Agent** | ✅ Complete | `AGENTS/pdf-generator-agent.md` |
+| 5 | **Site Manager Agent** | ✅ Complete | `AGENTS/site-manager-agent.md` |
+
+---
+
+## Lead Tracking
+- **NZ Leads:** 98 verified | **CA Leads:** 39 verified | **Total:** 137
+- **NZ Sheet:** https://docs.google.com/spreadsheets/d/1IUbBYhmr7hf-AlRDQbGUTFu8dc-BQg2Sl7h57aba4Us/edit
+- **CA Sheet:** https://docs.google.com/spreadsheets/d/17MZkOELXWdIhjDLS2bg6fAzgcVtkNbMWSz7GzlEf7N8/edit
+
+---
+
+## Sample Site: Anbu Tattoo Studio
+- **Client:** Anbu Tattoo Studio, Toronto, Canada
+- **Live URL:** https://anbu-tattoo.vercel.app
+- **Pages:** Home, Portfolio, About, Services, Booking, Blog, Contact (all ✅)
+- **Design:** Dark Cinematic Minimal — Black (#0A0A0A), Gold (#C8A97E), White
+- **Fonts:** Playfair Display, Inter, Bebas Neue
+
+---
+
+## Project Timeline
+- **June 14:** Project started, scraper built, 137 leads collected
+- **June 15:** Anbu Tattoo site built and deployed, mobile fixes applied
+- **Friday (June 20):** Build phase begins (Ethan & Moses onboarded)
+- **Monday (June 23):** Outreach begins
+
+---
+
+## Team
+- **Owner:** Gwambo Digital (hekayaconcepts@gmail.com)
+- **Founders:** hekayaconcepts@gmail.com, moyosray@gmail.com, sharonkihu624@gmail.com
+- **Developers:** Ethan + Moses (commission-based)
+- **Primary email:** gwamboconsults@gmail.com
+
+---
+
 ## Agent Build Phase
 
 | # | Agent | Status | Location |
