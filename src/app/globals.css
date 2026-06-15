@@ -24,7 +24,11 @@
   box-sizing: border-box;
 }
 
-html {
+/* CRITICAL: Prevent horizontal overflow on mobile */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
   scroll-behavior: smooth;
 }
 
@@ -36,22 +40,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Ensure all images and containers fit within viewport */
+img, div, section, main, header, footer, nav, article {
+  max-width: 100%;
+}
+
 /* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 4px;
-}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
 
 /* Typography utilities */
 .font-playfair { font-family: var(--font-playfair); }
 .font-bebas { font-family: var(--font-bebas); }
-
 .text-accent { color: var(--accent); }
 .text-accent-hover:hover { color: var(--accent-hover); }
 .bg-accent { background-color: var(--accent); }

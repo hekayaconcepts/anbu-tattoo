@@ -25,21 +25,61 @@ export default function Header() {
 
   return (
     <>
-      {/* Header — fixed, separate from hero */}
+      {/* Prevent horizontal overflow globally */}
+      <style>{`
+        html, body { overflow-x: hidden; max-width: 100%; }
+        * { box-sizing: border-box; }
+        @media (min-width: 768px) {
+          .desktop-nav { display: flex !important; }
+          .mobile-only { display: none !important; }
+        }
+        @media (max-width: 767px) {
+          .desktop-nav { display: none !important; }
+          .mobile-only { display: flex !important; }
+        }
+      `}</style>
+
       <header style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 9999,
-        height: '56px',
+        height: '52px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '0 16px',
         transition: 'all 0.3s ease',
-        backgroundColor: scrolled ? 'rgba(10,10,10,0.95)' : 'rgba(10,10,10,0.5)',
-        backdropFilter: scrolled ? 'blur(10px)' : 'blur(4px)',
+        backgroundColor: scrolled ? 'rgba(10,10,10,0.95)' : 'rgba(10,10,10,0.6)',
+        backdropFilter: 'blur(8px)',
         borderBottom: scrolled ? '1px solid rgba(200,169,126,0.1)' : '1px solid rgba(255,255,255,0.05)',
       }}>
-        {/* Hamburger — LEFT side on mobile */}
-        <button onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu" style={{
+        {/* Logo — LEFT (standard pattern) */}
+        <Link href="/" style={{
+          textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px',
+          flexShrink: 0,
+        }}>
+          <Image src="/logo.png" alt="Anbu Tattoo" width={32} height={32} priority />
+          <span style={{
+            fontFamily: 'Bebas Neue, sans-serif', fontSize: '20px', color: '#C8A97E',
+            letterSpacing: '5px', whiteSpace: 'nowrap',
+          }}>ANBU</span>
+        </Link>
+
+        {/* Desktop Nav — RIGHT */}
+        <nav className="desktop-nav" style={{ alignItems: 'center', gap: '24px', display: 'none' }}>
+          {navLinks.map((link) => (
+            <Link key={link.href} href={link.href} style={{
+              color: '#FFFFFF', textDecoration: 'none', fontSize: '12px',
+              fontWeight: 500, letterSpacing: '1px', textTransform: 'uppercase',
+            }}>{link.label}</Link>
+          ))}
+          <Link href="/booking" style={{
+            color: '#0A0A0A', backgroundColor: '#C8A97E', padding: '8px 20px',
+            borderRadius: '4px', textDecoration: 'none', fontSize: '12px',
+            fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase',
+          }}>Book Now</Link>
+        </nav>
+
+        {/* Hamburger — RIGHT (standard pattern, mobile only) */}
+        <button className="mobile-only" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu" style={{
           background: 'none', border: 'none', cursor: 'pointer',
-          display: 'flex', flexDirection: 'column', gap: '5px', padding: '8px',
+          display: 'none', flexDirection: 'column', gap: '5px', padding: '8px',
           width: '40px', height: '40px', alignItems: 'center', justifyContent: 'center',
         }}>
           <span style={{
@@ -57,38 +97,6 @@ export default function Header() {
             transform: menuOpen ? 'rotate(-45deg) translate(4px, -4px)' : 'rotate(0deg)',
           }} />
         </button>
-
-        {/* Logo — CENTER */}
-        <Link href="/" style={{
-          textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px',
-          position: 'absolute', left: '50%', transform: 'translateX(-50%)',
-        }}>
-          <Image src="/logo.png" alt="Anbu Tattoo" width={32} height={32} priority />
-          <span style={{
-            fontFamily: 'Bebas Neue, sans-serif', fontSize: '22px', color: '#C8A97E',
-            letterSpacing: '5px', whiteSpace: 'nowrap',
-          }}>ANBU</span>
-        </Link>
-
-        {/* Desktop Nav — RIGHT side (hidden on mobile) */}
-        <nav style={{
-          display: 'none', alignItems: 'center', gap: '24px',
-        }} className="desktop-nav">
-          {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} style={{
-              color: '#FFFFFF', textDecoration: 'none', fontSize: '12px',
-              fontWeight: 500, letterSpacing: '1px', textTransform: 'uppercase',
-            }}>{link.label}</Link>
-          ))}
-          <Link href="/booking" style={{
-            color: '#0A0A0A', backgroundColor: '#C8A97E', padding: '8px 20px',
-            borderRadius: '4px', textDecoration: 'none', fontSize: '12px',
-            fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase',
-          }}>Book Now</Link>
-        </nav>
-
-        {/* Spacer for mobile (balances the hamburger on left) */}
-        <div style={{ width: '40px', height: '40px' }} />
       </header>
 
       {/* Mobile Menu Overlay */}
@@ -110,10 +118,10 @@ export default function Header() {
             fontWeight: 600, fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '3px', marginTop: '16px',
           }}>Book Now</Link>
         </div>
-      )}
+      )>
 
-      {/* Spacer to push hero below header */}
-      <div style={{ height: '56px' }} />
+      {/* Spacer to push content below fixed header */}
+      <div style={{ height: '52px', flexShrink: 0 }} />
     </>
   )
 }

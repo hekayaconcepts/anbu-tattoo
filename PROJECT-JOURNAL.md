@@ -144,3 +144,19 @@
   - Removed Tailwind visibility classes, using single responsive layout
   - Reduced mobile hero padding and font sizes to fit better
 - **Verified:** All 7 pages working after redeployment
+
+### June 15, 2026 — Mobile Header & Overflow Fix (Research-Based)
+- **Researched mobile navigation patterns** using Tavily:
+  - Hamburger menu: top-left OR top-right are both standard. Left aligns with reading patterns, right is thumb-friendly. Most common: logo LEFT, hamburger RIGHT.
+  - Overflow prevention: `overflow-x: hidden` on body/html, use `width: 100%` not fixed widths, check for negative margins.
+  - Header pattern: Logo on left, hamburger on right is the most standard pattern.
+- **Fixed header:** Logo LEFT, hamburger RIGHT (standard pattern)
+- **Fixed overflow:** Added `overflow-x: hidden` and `max-width: 100%` to html/body and all major elements
+- **Fixed hero:** Reduced font sizes, added `overflow: hidden` wrapper, ensured all content fits within viewport
+- **Sources:**
+  - IxDF: ixdf.org/literature/article/hamburger-menu-ux
+  - Justinmind: justinmind.com/ui-design/hamburger-menu
+  - Figma: figma.com/resource-library/hamburger-menu
+  - Stack Overflow: stackoverflow.com/questions/15086908 (overflow prevention)
+  - Polypane: polypane.app/blog/strategies-for-dealing-with-horizontal-overflows
+  - Chen Hui Jing: chenhuijing.com/blog/the-horizontal-overflow-problem
