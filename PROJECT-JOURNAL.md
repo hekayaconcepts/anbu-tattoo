@@ -124,3 +124,11 @@
 - [ ] Create email templates per category
 - [ ] Outreach agent cron job setup
 - [ ] Follow-up sequence automation
+
+### June 15, 2026 — Mobile Fixes
+- **Removed About section from home page** — Simplified to Hero + FeaturedWork + ServicesPreview + BookingCTA
+- **Fixed mobile header** — Compact logo (ANBU text only), proper hamburger positioning, reduced padding (12px 16px)
+- **Fixed mobile hero** — Separate mobile layout with single main image + text overlay, thumbnail strip below
+- **Fixed FeaturedWork** — Single column on mobile (1fr), 2-col on tablet, 3-col on desktop
+- **Removed carousel complexity** — Simple single-column stack on mobile, no swipe/arrows needed
+- **All 7 pages verified live after Vercel redeployment**
