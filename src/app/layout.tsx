@@ -38,9 +38,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${playfair.variable} ${inter.variable} ${bebas.variable} font-sans bg-[#0A0A0A] text-white antialiased`}>
-        {children}
+    <html lang="en" className="scroll-smooth" style={{ overflowX: "hidden", maxWidth: "100%" }}>
+      <body
+        className={`${playfair.variable} ${inter.variable} ${bebas.variable} font-sans bg-[#0A0A0A] text-white antialiased`}
+        style={{ overflowX: "hidden", maxWidth: "100%", position: "relative" }}
+      >
+        <div style={{ overflowX: "hidden", maxWidth: "100%", minHeight: "100vh" }}>
+          {children}
+        </div>
       </body>
     </html>
   );

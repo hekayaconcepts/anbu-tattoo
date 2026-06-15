@@ -160,3 +160,13 @@
   - Stack Overflow: stackoverflow.com/questions/15086908 (overflow prevention)
   - Polypane: polypane.app/blog/strategies-for-dealing-with-horizontal-overflows
   - Chen Hui Jing: chenhuijing.com/blog/the-horizontal-overflow-problem
+
+### June 15, 2026 — Final Deployment
+- Connected GitHub repo to Vercel manually by user
+- Removed output:"export" from next.config.ts (was conflicting with Vercel's Next.js build)
+- Changed blog from static sub-pages to client-side rendered single page
+- Blog listing shows excerpts with "Read More" button that expands inline
+- All 7 pages verified returning 200 on Vercel
+- Site live at: https://anbu-tattoo.vercel.app
+- **Known issues:** None currently — all pages working
+- **Next:** Friday build phase begins, Monday outreach begins
