@@ -224,6 +224,46 @@
 - **Known issues:** None currently — all pages working
 - **Next:** Friday build phase begins, Monday outreach begins
 
+### June 15, 2026 — Booking System with Resend & Vercel Blob
+
+#### What was learned:
+- **Resend** (resend.com) is an email API service. Send transactional emails via REST API with a simple `resend.emails.send()` call. Much simpler than Gmail API — no OAuth token refresh, no base64 encoding, no RFC 2822 formatting.
+- **Vercel Blob** (vercel.com/docs/vercel-blob) is Vercel's object storage service. Files are uploaded via `put()` and returned as publicly accessible URLs. Public blobs are readable by anyone with the URL, no auth needed. Write access requires a `BLOB_READ_WRITE` token that's auto-injected when you connect a Blob store to your Vercel project.
+- **Public vs Private blobs:** Public = anyone with URL can read. Private = requires authenticated token to read. For booking reference images, public is fine — the images are not sensitive.
+- **FormData with fetch:** To upload files from a React form to an API route, use `FormData` (not JSON). The API route receives it with `request.formData()` and extracts fields with `formData.get('fieldname')`.
+
+#### Setup:
+- **Resend API Key:** set as `RESEND_API_KEY` env var on Vercel
+- **Vercel Blob Store:** Public store in Montréal, Canada. Store ID: `store_G2aZSXNKKXEYlihA`. Base URL: `https://g2azsxnkkxeyliha.public.blob.vercel-storage.com`
+- **Email from:** `Anbu Tattoo <onboarding@resend.dev>` (Resend's default test domain — fine for demo)
+- **Email to:** `hekayaconcepts@gmail.com` (founders receive all booking requests)
+
+#### How the booking flow works now:
+1. User fills form (name, email, phone, date, description, optional image)
+2. Clicks Submit → `handleSubmit` creates `FormData`, appends all fields including file
+3. `fetch('/api/booking', { method: 'POST', body: data })` sends multipart/form-data
+4. API route receives FormData, uploads image to Vercel Blob via `put()`, gets public URL
+5. API route sends email via Resend with all booking details + image URL
+6. User sees success message on page
+
+#### Files changed:
+- `src/app/api/booking/route.ts` — Rewritten with Resend + Vercel Blob
+- `src/app/booking/page.tsx` — `handleSubmit` rewritten to use FormData
+- `next.config.ts` — Removed `output: "export"` (API routes need server runtime)
+- `.env.example` — Added `GOOGLE_ACCESS_TOKEN` placeholder (not used by booking, but documented)
+
+#### Dependencies added:
+- `resend` — Email API client
+- `@vercel/blob` — Vercel Blob storage client
+
+#### Environment variables on Vercel:
+- `RESEND_API_KEY` = set on Vercel dashboard
+- `BLOB_READ_WRITE` = auto-injected by Vercel (connected Blob store)
+
+#### What still needs to be done:
+- [ ] Test the full booking flow end-to-end (submit with image, verify email received)
+- [ ] The `from` address is `onboarding@resend.dev` — for production, should be changed to a verified domain
+
 ### June 15, 2026 — Legal Pages & Booking Fix
 - **Privacy Policy** (`/privacy`): PIPEDA, Quebec Law 25, GDPR compliant. Covers data collection, usage, storage/security, user rights, CASL compliance.
 - **Terms of Service** (`/terms`): Ontario law. Covers age/consent, bookings/deposits, health/safety, artwork ownership, liability, governing law.
