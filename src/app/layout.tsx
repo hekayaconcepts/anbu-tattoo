@@ -1,25 +1,11 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter, Bebas_Neue } from "next/font/google";
-// CSS inlined
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-});
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", display: "swap" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const bebas = Bebas_Neue({ weight: "400", subsets: ["latin"], variable: "--font-bebas", display: "swap" });
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const bebas = Bebas_Neue({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-bebas",
-  display: "swap",
-});
+export const viewport = { width: 'device-width', initialScale: 1, maximumScale: 5 };
 
 export const metadata: Metadata = {
   title: "Anbu Tattoo | Custom Tattoo Art in Toronto",
@@ -32,20 +18,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth" style={{ overflowX: "hidden", maxWidth: "100%" }}>
-      <body
-        className={`${playfair.variable} ${inter.variable} ${bebas.variable} font-sans bg-[#0A0A0A] text-white antialiased`}
-        style={{ overflowX: "hidden", maxWidth: "100%", position: "relative" }}
-      >
-        <div style={{ overflowX: "hidden", maxWidth: "100%", minHeight: "100vh" }}>
-          {children}
-        </div>
+    <html lang="en" className="scroll-smooth">
+      <body className={`${playfair.variable} ${inter.variable} ${bebas.variable} font-sans bg-[#0A0A0A] text-white antialiased`}>
+        <div style={{ minHeight: '100vh' }}>{children}</div>
       </body>
     </html>
   );
