@@ -132,3 +132,15 @@
 - **Fixed FeaturedWork** — Single column on mobile (1fr), 2-col on tablet, 3-col on desktop
 - **Removed carousel complexity** — Simple single-column stack on mobile, no swipe/arrows needed
 - **All 7 pages verified live after Vercel redeployment**
+
+### June 15, 2026 — Header & Hero Mobile Fix
+- **Issue:** Hamburger menu appearing on left instead of right, header overlapping hero, horizontal overflow on mobile
+- **Root cause:** Tailwind CSS classes (md:hidden, hidden md:flex) not working properly in Vercel deployment. The header and hero were sharing the same space.
+- **Fix:** 
+  - Completely rewrote Header with inline styles only (no Tailwind classes)
+  - Hamburger on LEFT, logo CENTERED, spacer on RIGHT for balance
+  - Added explicit 56px height to header
+  - Added spacer div below header to push hero content down
+  - Removed Tailwind visibility classes, using single responsive layout
+  - Reduced mobile hero padding and font sizes to fit better
+- **Verified:** All 7 pages working after redeployment

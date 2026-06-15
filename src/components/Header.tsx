@@ -25,64 +25,95 @@ export default function Header() {
 
   return (
     <>
+      {/* Header — fixed, separate from hero */}
       <header style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
-        padding: '12px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 9999,
+        height: '56px',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '0 16px',
         transition: 'all 0.3s ease',
-        backgroundColor: scrolled ? 'rgba(10,10,10,0.95)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(10px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(200,169,126,0.1)' : 'none',
+        backgroundColor: scrolled ? 'rgba(10,10,10,0.95)' : 'rgba(10,10,10,0.5)',
+        backdropFilter: scrolled ? 'blur(10px)' : 'blur(4px)',
+        borderBottom: scrolled ? '1px solid rgba(200,169,126,0.1)' : '1px solid rgba(255,255,255,0.05)',
       }}>
-        {/* Logo — compact */}
-        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
-          <Image src="/logo.png" alt="Anbu Tattoo" width={36} height={36} priority />
-          <span style={{ fontFamily: 'Bebas Neue, sans-serif', fontSize: '20px', color: '#C8A97E', letterSpacing: '4px', whiteSpace: 'nowrap' }}>
-            ANBU
-          </span>
-        </Link>
-
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex" style={{ alignItems: 'center', gap: '28px' }}>
-          {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} style={{ color: '#FFFFFF', textDecoration: 'none', fontSize: '13px', fontWeight: 400, letterSpacing: '1px', textTransform: 'uppercase' }}>
-              {link.label}
-            </Link>
-          ))}
-          <Link href="/booking" style={{ color: '#0A0A0A', backgroundColor: '#C8A97E', padding: '10px 24px', borderRadius: '4px', textDecoration: 'none', fontSize: '13px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>
-            Book Now
-          </Link>
-        </nav>
-
-        {/* Mobile Hamburger — always visible, right side */}
-        <button onClick={() => setMenuOpen(!menuOpen)} style={{
+        {/* Hamburger — LEFT side on mobile */}
+        <button onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu" style={{
           background: 'none', border: 'none', cursor: 'pointer',
           display: 'flex', flexDirection: 'column', gap: '5px', padding: '8px',
-          flexShrink: 0,
+          width: '40px', height: '40px', alignItems: 'center', justifyContent: 'center',
         }}>
-          <span style={{ width: '24px', height: '2px', backgroundColor: '#C8A97E', display: 'block', transition: 'all 0.3s', transform: menuOpen ? 'rotate(45deg) translate(4px, 4px)' : 'none' }} />
-          <span style={{ width: '24px', height: '2px', backgroundColor: '#C8A97E', display: 'block', opacity: menuOpen ? 0 : 1 }} />
-          <span style={{ width: '24px', height: '2px', backgroundColor: '#C8A97E', display: 'block', transition: 'all 0.3s', transform: menuOpen ? 'rotate(-45deg) translate(4px, -4px)' : 'none' }} />
+          <span style={{
+            width: '22px', height: '2px', backgroundColor: '#C8A97E', display: 'block',
+            transition: 'all 0.3s',
+            transform: menuOpen ? 'rotate(45deg) translate(4px, 4px)' : 'rotate(0deg)',
+          }} />
+          <span style={{
+            width: '22px', height: '2px', backgroundColor: '#C8A97E', display: 'block',
+            opacity: menuOpen ? 0 : 1, transition: 'opacity 0.3s',
+          }} />
+          <span style={{
+            width: '22px', height: '2px', backgroundColor: '#C8A97E', display: 'block',
+            transition: 'all 0.3s',
+            transform: menuOpen ? 'rotate(-45deg) translate(4px, -4px)' : 'rotate(0deg)',
+          }} />
         </button>
+
+        {/* Logo — CENTER */}
+        <Link href="/" style={{
+          textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px',
+          position: 'absolute', left: '50%', transform: 'translateX(-50%)',
+        }}>
+          <Image src="/logo.png" alt="Anbu Tattoo" width={32} height={32} priority />
+          <span style={{
+            fontFamily: 'Bebas Neue, sans-serif', fontSize: '22px', color: '#C8A97E',
+            letterSpacing: '5px', whiteSpace: 'nowrap',
+          }}>ANBU</span>
+        </Link>
+
+        {/* Desktop Nav — RIGHT side (hidden on mobile) */}
+        <nav style={{
+          display: 'none', alignItems: 'center', gap: '24px',
+        }} className="desktop-nav">
+          {navLinks.map((link) => (
+            <Link key={link.href} href={link.href} style={{
+              color: '#FFFFFF', textDecoration: 'none', fontSize: '12px',
+              fontWeight: 500, letterSpacing: '1px', textTransform: 'uppercase',
+            }}>{link.label}</Link>
+          ))}
+          <Link href="/booking" style={{
+            color: '#0A0A0A', backgroundColor: '#C8A97E', padding: '8px 20px',
+            borderRadius: '4px', textDecoration: 'none', fontSize: '12px',
+            fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase',
+          }}>Book Now</Link>
+        </nav>
+
+        {/* Spacer for mobile (balances the hamburger on left) */}
+        <div style={{ width: '40px', height: '40px' }} />
       </header>
 
       {/* Mobile Menu Overlay */}
       {menuOpen && (
-        <div className="md:hidden" style={{
+        <div style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
           backgroundColor: 'rgba(10,10,10,0.98)', backdropFilter: 'blur(20px)',
-          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '28px', zIndex: 40,
+          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '24px', zIndex: 9998,
         }}>
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)} style={{
-              color: '#FFFFFF', textDecoration: 'none', fontSize: '22px', fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '3px',
+              color: '#FFFFFF', textDecoration: 'none', fontSize: '24px',
+              fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '4px',
             }}>{link.label}</Link>
           ))}
           <Link href="/booking" onClick={() => setMenuOpen(false)} style={{
-            color: '#0A0A0A', backgroundColor: '#C8A97E', padding: '14px 32px', borderRadius: '4px',
-            textDecoration: 'none', fontSize: '16px', fontWeight: 600, fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '2px', marginTop: '12px',
+            color: '#0A0A0A', backgroundColor: '#C8A97E', padding: '14px 36px',
+            borderRadius: '4px', textDecoration: 'none', fontSize: '18px',
+            fontWeight: 600, fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '3px', marginTop: '16px',
           }}>Book Now</Link>
         </div>
       )}
+
+      {/* Spacer to push hero below header */}
+      <div style={{ height: '56px' }} />
     </>
   )
 }
