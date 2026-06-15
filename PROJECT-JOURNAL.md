@@ -223,3 +223,11 @@
 - Site live at: https://anbu-tattoo.vercel.app
 - **Known issues:** None currently — all pages working
 - **Next:** Friday build phase begins, Monday outreach begins
+
+### June 15, 2026 — Legal Pages & Booking Fix
+- **Privacy Policy** (`/privacy`): PIPEDA, Quebec Law 25, GDPR compliant. Covers data collection, usage, storage/security, user rights, CASL compliance.
+- **Terms of Service** (`/terms`): Ontario law. Covers age/consent, bookings/deposits, health/safety, artwork ownership, liability, governing law.
+- **Footer updated:** Mobile-first stack layout, quick links wrap on mobile, 3-column on desktop. Links to privacy/terms.
+- **Booking page fixed:** Replaced `className="font-playfair"` with `style={{ fontFamily: 'var(--font-playfair)' }}` (inline style). Added demo console.log. File upload shows selected filename + size. Responsive grid: 1fr mobile, 1.2fr/0.8fr desktop.
+- **Layout.tsx:** Added `export const viewport` for proper mobile scaling.
+- **All 9 pages verified live** (Home, Portfolio, About, Services, Booking, Blog, Contact, Privacy, Terms)
