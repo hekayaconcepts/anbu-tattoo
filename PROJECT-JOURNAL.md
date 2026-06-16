@@ -271,3 +271,37 @@
 - **Booking page fixed:** Replaced `className="font-playfair"` with `style={{ fontFamily: 'var(--font-playfair)' }}` (inline style). Added demo console.log. File upload shows selected filename + size. Responsive grid: 1fr mobile, 1.2fr/0.8fr desktop.
 - **Layout.tsx:** Added `export const viewport` for proper mobile scaling.
 - **All 9 pages verified live** (Home, Portfolio, About, Services, Booking, Blog, Contact, Privacy, Terms)
+
+---
+
+## Next Project: Paw Palace Pet Grooming
+
+### Client
+- **Name:** GTA Paw Palace
+- **Lead ID:** CA-2026-06-10-012
+- **Address:** 936 Avenue Rd, Toronto, ON M5P 2K8
+- **Phone:** (647) 886-3133
+- **Existing site:** https://www.gtapawpalace.ca/ (GoDaddy template)
+- **Rating:** 5.0 stars, 11 reviews (all 5-star)
+- **Hours:** Mon-Sun 8AM-9PM
+
+### Research
+- **Inspiration:** wooof.com.au — borrowed hero text style ("Hey, you there. Your dog is stinky."), conversational tone, playful but professional
+- **Design system:** "Warm Clay & Playful" — hybrid of Nature Distillation (terracotta, sand, cream) + Claymorphism (rounded, soft shadows, playful) + Micro-interactions
+- **Why this style:** Most pet grooming sites are either corporate blue/white or overly cute pastel. This hybrid is warm but professional, playful but trustworthy — matching their 5-star reputation
+- **Colors:** Primary Terracotta #C67B5C, Background Cream #FFFBEB, Accent Sage #6B9B5E, Text Brown #2D1B0E
+- **Fonts:** Nunito (headings, friendly rounded) + Inter (body, clean readable)
+
+### Build Plan
+- Full plan at `/workspace/paw-palace-build-plan.md`
+- 22-28 images needed (15 stock + 8-10 client + 3-5 illustrations)
+- Same tool stack as Anbu Tattoo (Next.js, Vercel, Resend, Vercel Blob, inline styles)
+- Supabase needed for Phase 2 (bookings, blog CMS, ecom)
+- 3 phases: Core site (Week 1), Content & Launch (Week 2), Growth (Week 3+)
+
+### Key Decisions
+- **Blog + Ecom foundation:** Pet grooming has high blog potential (SEO) and can add ecom later (pet products)
+- **Wooof.com.au hero text:** Direct, funny, conversational — stops scrollers
+- **No Tailwind:** Inline styles only (Hekaya Concepts standard)
+- **Responsive:** Mobile-first, 6 breakpoints, touch targets ≥44px
+- **Security:** HTTPS, server-side validation, env vars only on server, no tracking scripts
